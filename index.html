@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NE555 Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background color selector -->
+    <div class="theme-selector">
+        <button onclick="toggleColors()">🎨 Background</button>
+
+        <div id="colorMenu">
+            <button onclick="changeBackground('white')">White</button>
+            <button onclick="changeBackground('lightblue')">Blue</button>
+            <button onclick="changeBackground('lightgreen')">Green</button>
+            <button onclick="changeBackground('lavender')">Purple</button>
+            <button onclick="changeBackground('#222222')">Dark</button>
+        </div>
+    </div>
+
+    <!-- Calculator -->
+    <div class="calculator">
+
+        <h1>NE555 Frequency Calculator</h1>
+        <p>Calculate frequency and duty cycle in astable mode, or reverse: frequency and duty cycle to resistors.</p>
+
+        <div class="mode-switch">
+            <button id="btn-forward" class="mode-btn active" onclick="setMode('forward')">Forward</button>
+            <button id="btn-reverse" class="mode-btn" onclick="setMode('reverse')">Reverse</button>
+        </div>
+
+        <!-- Forward form -->
+        <form id="forward-form" onsubmit="onForwardClick(event)">
+
+            <!-- Resistance Ra -->
+            <label for="ra">Resistance Ra</label>
+            <div class="input-group">
+                <input id="ra" type="number" step="any" placeholder="Enter Ra">
+                <select id="ra-unit">
+                    <option value="1">Ω</option>
+                    <option value="1000" selected>kΩ</option>
+                    <option value="1000000">MΩ</option>
+                </select>
+            </div>
+
+            <!-- Resistance Rb -->
+            <label for="rb">Resistance Rb</label>
+            <div class="input-group">
+                <input id="rb" type="number" step="any" placeholder="Enter Rb">
+                <select id="rb-unit">
+                    <option value="1">Ω</option>
+                    <option value="1000" selected>kΩ</option>
+                    <option value="1000000">MΩ</option>
+                </select>
+            </div>
+
+            <!-- Capacitance C -->
+            <label for="c">Capacitance C</label>
+            <div class="input-group">
+                <input id="c" type="number" step="any" placeholder="Enter C">
+                <select id="c-unit">
+                    <option value="1">F</option>
+                    <option value="0.000001">µF</option>
+                    <option value="0.000000001" selected>nF</option>
+                    <option value="0.000000000001">pF</option>
+                </select>
+            </div>
+
+            <button type="submit">Calculate Frequency</button>
+
+        </form>
+
+        <!-- Reverse form -->
+        <form id="reverse-form" onsubmit="onReverseClick(event)" style="display:none">
+
+            <!-- Frequency f -->
+            <label for="f">Frequency f</label>
+            <div class="input-group">
+                <input id="f" type="number" step="any" placeholder="Enter frequency">
+                <select id="f-unit">
+                    <option value="1" selected>Hz</option>
+                    <option value="1000">kHz</option>
+                    <option value="1000000">MHz</option>
+                </select>
+            </div>
+
+            <!-- Duty cycle D -->
+            <label for="d">Duty Cycle (%)</label>
+            <div class="input-group">
+                <input id="d" type="number" step="any" min="50" max="100" placeholder="50 to 100">
+            </div>
+
+            <!-- Capacitance C -->
+            <label for="c-rev">Capacitance C</label>
+            <div class="input-group">
+                <input id="c-rev" type="number" step="any" placeholder="Enter C">
+                <select id="c-rev-unit">
+                    <option value="1">F</option>
+                    <option value="0.000001">µF</option>
+                    <option value="0.000000001" selected>nF</option>
+                    <option value="0.000000000001">pF</option>
+                </select>
+            </div>
+
+            <button type="submit">Calculate Resistors</button>
+
+        </form>
+
+        <p id="error"></p>
+
+        <!-- Results -->
+        <div id="results">
+
+            <div class="result-grid">
+                <div class="result-card">
+                    <span id="result1-label">Frequency</span>
+                    <h2 id="result1"></h2>
+                </div>
+
+                <div class="result-card">
+                    <span id="result2-label">Duty Cycle</span>
+                    <h2 id="result2"></h2>
+                </div>
+
+                <div class="result-card">
+                    <span id="result3-label">Period</span>
+                    <h2 id="result3"></h2>
+                </div>
+            </div>
+
+            <!-- Signal waveform -->
+            <div class="waveform-container">
+
+                <h3>Signal Waveform</h3>
+                <p>NE555 output signal (3 periods)</p>
+
+                <div class="graph">
+                    <svg id="waveform" viewBox="0 0 500 150">
+                        <path id="wave-path"></path>
+                    </svg>
+                </div>
+
+                <div class="signal-info">
+                    <div>
+                        HIGH time:
+                        <strong id="high-time"></strong>
+                    </div>
+
+                    <div>
+                        LOW time:
+                        <strong id="low-time"></strong>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,287 @@
+/* General page style */
+body {
+    margin: 0;
+    padding: 100px 20px 40px;
+    background: #f0f2f8;
+    font-family: 'Outfit', Arial, sans-serif;
+    color: #25213b;
+    transition: background 0.3s;
+}
+
+/* Calculator */
+.calculator {
+    max-width: 620px;
+    margin: 20px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 35px #00000015;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+p {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Mode switch */
+.mode-switch {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.mode-btn {
+    flex: 1;
+    background: #e8e4f8;
+    color: #6515e8;
+}
+
+.mode-btn.active {
+    background: #6515e8;
+    color: white;
+}
+
+/* Input fields */
+label {
+    display: block;
+    margin: 20px 0 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+
+input, select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+}
+
+input {
+    flex: 1;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus {
+    border-color: #6515e8;
+    box-shadow: 0 0 0 3px #6515e820;
+}
+
+select {
+    width: 90px;
+    background: #f5f3ff;
+    color: #6515e8;
+    font-weight: 600;
+}
+
+/* Buttons */
+button {
+    padding: 11px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #6515e8;
+    color: white;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #4d0fb5;
+    transform: translateY(-2px);
+}
+
+form button {
+    width: 100%;
+    margin-top: 30px;
+    padding: 15px;
+    font-size: 15px;
+}
+
+/* Error */
+#error {
+    color: #d62828;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Results */
+#results {
+    display: none;
+    margin-top: 30px;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.result-card {
+    padding: 20px 10px;
+    background: #f5f3ff;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.result-card span {
+    font-size: 12px;
+    color: #70658c;
+}
+
+.result-card h2 {
+    margin-bottom: 0;
+    color: #6515e8;
+    font-size: 22px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+/* Waveform */
+.waveform-container {
+    margin-top: 25px;
+    padding: 20px;
+    background: #fafaff;
+    border-radius: 12px;
+}
+
+.waveform-container h3 {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.graph {
+    background-color: white;
+    background-image:
+        linear-gradient(#e8e8f0 1px, transparent 1px),
+        linear-gradient(90deg, #e8e8f0 1px, transparent 1px);
+    background-size: 25px 25px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+#waveform {
+    display: block;
+    width: 100%;
+}
+
+#wave-path {
+    fill: none;
+    stroke: #6515e8;
+    stroke-width: 4;
+    stroke-linejoin: round;
+}
+
+.signal-info {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.signal-info strong {
+    color: #6515e8;
+}
+
+/* Background selector */
+.theme-selector {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+}
+
+#colorMenu {
+    display: none;
+    position: absolute;
+    top: 45px;
+    left: 0;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px #00000025;
+}
+
+#colorMenu button {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+/* Dark theme */
+.dark-theme .calculator {
+    background: #30303a;
+    color: white;
+}
+
+.dark-theme .calculator p {
+    color: #ccc;
+}
+
+.dark-theme .result-card {
+    background: #3d354f;
+}
+
+.dark-theme .result-card h2,
+.dark-theme .signal-info strong {
+    color: #b794ff;
+}
+
+.dark-theme .waveform-container {
+    background: #383842;
+}
+
+.dark-theme .waveform-container h3 {
+    color: white;
+}
+
+.dark-theme .mode-btn {
+    background: #4a4060;
+    color: #b794ff;
+}
+
+.dark-theme .mode-btn.active {
+    background: #6515e8;
+    color: white;
+}
+
+/* Mobile screens */
+@media (max-width: 600px) {
+    body {
+        padding: 85px 15px 30px;
+    }
+
+    .calculator {
+        padding: 25px 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .signal-info {
+        flex-direction: column;
+        text-align: center;
+    }
+}
